@@ -1,0 +1,14 @@
+{{#modal-dialog 
+  close="cancel"
+  targetAttachment="center"
+  translucentOverlay=true}}
+  <div class="dialog-content">
+    <div class="dialog-body">
+      Do you want to create a new game?
+    </div>
+    <div class="dialog-footer">
+      {{#animated-button bigButton=true fillColor="#D32F2F" clicked=(action "confirm")}} Yes {{/animated-button}}
+      {{#animated-button bigButton=true fillColor="#E0E0E0" clicked=(action "cancel")}} No {{/animated-button}}  
+    </div>
+  </div>  
+{{/modal-dialog}}
