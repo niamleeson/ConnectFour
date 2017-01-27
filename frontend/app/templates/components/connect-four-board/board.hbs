@@ -2,37 +2,37 @@
   <g id="discs">
   </g>
   <g id="columns" style="transform:translate(0,100px);">
-    {{board-column left=10 top=10 fillColor=fillColor index=0 columnClicked=(action "columnClicked")}}
-    {{board-column left=110 top=10 fillColor=fillColor index=1 columnClicked=(action "columnClicked")}}
-    {{board-column left=210 top=10 fillColor=fillColor index=2 columnClicked=(action "columnClicked")}}
-    {{board-column left=310 top=10 fillColor=fillColor index=3 columnClicked=(action "columnClicked")}}
-    {{board-column left=410 top=10 fillColor=fillColor index=4 columnClicked=(action "columnClicked")}}
-    {{board-column left=510 top=10 fillColor=fillColor index=5 columnClicked=(action "columnClicked")}}
-    {{board-column left=610 top=10 fillColor=fillColor index=6 columnClicked=(action "columnClicked")}}
+    {{connect-four-board/board-column left=10 top=10 fillColor=fillColor index=0 columnClicked=(action "columnClicked")}}
+    {{connect-four-board/board-column left=110 top=10 fillColor=fillColor index=1 columnClicked=(action "columnClicked")}}
+    {{connect-four-board/board-column left=210 top=10 fillColor=fillColor index=2 columnClicked=(action "columnClicked")}}
+    {{connect-four-board/board-column left=310 top=10 fillColor=fillColor index=3 columnClicked=(action "columnClicked")}}
+    {{connect-four-board/board-column left=410 top=10 fillColor=fillColor index=4 columnClicked=(action "columnClicked")}}
+    {{connect-four-board/board-column left=510 top=10 fillColor=fillColor index=5 columnClicked=(action "columnClicked")}}
+    {{connect-four-board/board-column left=610 top=10 fillColor=fillColor index=6 columnClicked=(action "columnClicked")}}
     <g id="border-edges">
-      {{board-edge left=0 top=9 width=11 height=602 fillColor=fillColor}}
-      {{board-edge left=9 top=0 width=702 height=11 fillColor=fillColor}}
-      {{board-edge left=9 top=609 width=702 height=11 fillColor=fillColor}}  
-      {{board-edge left=709 top=9 width=11 height=601 fillColor=fillColor}}
+      {{connect-four-board/board-edge left=0 top=9 width=11 height=602 fillColor=fillColor}}
+      {{connect-four-board/board-edge left=9 top=0 width=702 height=11 fillColor=fillColor}}
+      {{connect-four-board/board-edge left=9 top=609 width=702 height=11 fillColor=fillColor}}  
+      {{connect-four-board/board-edge left=709 top=9 width=11 height=601 fillColor=fillColor}}
     </g>
     <g id="border-corners">
-      {{board-corner leftEdge=true cornerRadius=10 left=0 fillColor=fillColor}}
-      {{board-corner rightEdge=true cornerRadius=10 left=710 fillColor=fillColor}}
+      {{connect-four-board/board-corner leftEdge=true cornerRadius=10 left=0 fillColor=fillColor}}
+      {{connect-four-board/board-corner rightEdge=true cornerRadius=10 left=710 fillColor=fillColor}}
     </g>
     <g id="vertical-gap-fillers"> 
-      {{board-edge left=109 top=0 width=2 height=610 fillColor=fillColor}}
-      {{board-edge left=209 top=0 width=2 height=610 fillColor=fillColor}}    
-      {{board-edge left=309 top=0 width=2 height=610 fillColor=fillColor}}      
-      {{board-edge left=409 top=0 width=2 height=610 fillColor=fillColor}}      
-      {{board-edge left=509 top=0 width=2 height=610 fillColor=fillColor}}      
-      {{board-edge left=609 top=0 width=2 height=610 fillColor=fillColor}}
+      {{connect-four-board/board-edge left=109 top=0 width=2 height=610 fillColor=fillColor}}
+      {{connect-four-board/board-edge left=209 top=0 width=2 height=610 fillColor=fillColor}}    
+      {{connect-four-board/board-edge left=309 top=0 width=2 height=610 fillColor=fillColor}}      
+      {{connect-four-board/board-edge left=409 top=0 width=2 height=610 fillColor=fillColor}}      
+      {{connect-four-board/board-edge left=509 top=0 width=2 height=610 fillColor=fillColor}}      
+      {{connect-four-board/board-edge left=609 top=0 width=2 height=610 fillColor=fillColor}}
     </g>
     <g id="horizontal-gap-fillers">
-      {{board-edge left=0 top=109 width=710 height=2 fillColor=fillColor}}
-      {{board-edge left=0 top=209 width=710 height=2 fillColor=fillColor}}  
-      {{board-edge left=0 top=309 width=710 height=2 fillColor=fillColor}}  
-      {{board-edge left=0 top=409 width=710 height=2 fillColor=fillColor}}  
-      {{board-edge left=0 top=509 width=710 height=2 fillColor=fillColor}} 
+      {{connect-four-board/board-edge left=0 top=109 width=710 height=2 fillColor=fillColor}}
+      {{connect-four-board/board-edge left=0 top=209 width=710 height=2 fillColor=fillColor}}  
+      {{connect-four-board/board-edge left=0 top=309 width=710 height=2 fillColor=fillColor}}  
+      {{connect-four-board/board-edge left=0 top=409 width=710 height=2 fillColor=fillColor}}  
+      {{connect-four-board/board-edge left=0 top=509 width=710 height=2 fillColor=fillColor}} 
     </g> 
   </g>
 </svg>

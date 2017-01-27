@@ -8,14 +8,14 @@
   </div>
   <div class="body">
     <div>
-      {{connect-four-board fillColor='#00BCD4'}}
+      {{connect-four-board/board fillColor='#00BCD4'}}
     </div>
     <div class="buttons">
-      {{#animated-button bigButton=true fillColor="#FF9800" clicked=(action "chooseDifficulty")}} Difficulty: {{gameState.difficulty}} {{/animated-button}}
-      {{#animated-button bigButton=true fillColor="#FF9800" clicked=(action "createNewGame")}} New Game {{/animated-button}}
-      {{#animated-button bigButton=true fillColor="#FF9800"}} Save Game {{/animated-button}}
-      {{#animated-button bigButton=true fillColor="#FF9800"}} Load Game {{/animated-button}}
-      {{#animated-button bigButton=true fillColor="#FF9800"}} Replay {{/animated-button}}
+      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "chooseDifficulty")}} Difficulty: {{gameState.difficulty}} {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "createNewGame")}} New Game {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Save Game {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Load Game {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Replay {{/ui/animated-button}}
     </div>
   </div>
 </div>
