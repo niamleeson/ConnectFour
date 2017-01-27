@@ -1,8 +1,24 @@
 <div class="content">
   <div class="header">
-    
+    {{#if session.isAuthenticated}}
+      Welcome Jay <a {{action 'invalidateSession'}}>Logout</a>
+    {{else}}
+    {{/if}}
+    <img class="account-icon" src="images/account_icon.png">
   </div>
   <div class="body">
-    
+    <div>
+      {{connect-four-board fillColor='#00BCD4'}}
+    </div>
+    <div class="buttons">
+      {{#animated-button bigButton=true fillColor="#FF9800" clicked=(action "chooseDifficulty")}} Difficulty: {{gameState.difficulty}} {{/animated-button}}
+      {{#animated-button bigButton=true fillColor="#FF9800" clicked=(action "createNewGame")}} New Game {{/animated-button}}
+      {{#animated-button bigButton=true fillColor="#FF9800"}} Save Game {{/animated-button}}
+      {{#animated-button bigButton=true fillColor="#FF9800"}} Load Game {{/animated-button}}
+      {{#animated-button bigButton=true fillColor="#FF9800"}} Replay {{/animated-button}}
+    </div>
   </div>
 </div>
+{{#if modalDialog.isShowingDialog}}
+  {{component modalDialog.dialogPath}}
+{{/if}}
