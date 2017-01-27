@@ -42,3 +42,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'ember-cli-rails'
 
 gem 'rails_12factor', group: [:staging, :production]
+
+gem 'knock'
