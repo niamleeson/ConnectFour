@@ -1,0 +1,17 @@
+{{#modal-dialog 
+  close="cancel"
+  targetAttachment="center"
+  translucentOverlay=true}}
+  <div class="dialog-content">
+    <div class="dialog-body">
+      Please select the difficulty.
+    </div>
+    <div class="dialog-footer">
+      {{#animated-button fillColor=oneColor data=1 clicked=(action "difficultySelected")}} 1 {{/animated-button}}
+      {{#animated-button fillColor=twoColor data=2 clicked=(action "difficultySelected")}} 2 {{/animated-button}}
+      {{#animated-button fillColor=threeColor data=3 clicked=(action "difficultySelected")}} 3 {{/animated-button}}
+      {{#animated-button fillColor=fourColor data=4 clicked=(action "difficultySelected")}} 4 {{/animated-button}}
+      {{#animated-button fillColor=fiveColor data=5 clicked=(action "difficultySelected")}} 5 {{/animated-button}}      
+    </div>
+  </div>  
+{{/modal-dialog}}
