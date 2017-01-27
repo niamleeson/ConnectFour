@@ -1,0 +1,47 @@
+.ember-modal-dialog {
+  border-radius: 2px;
+  background-color: #fff;
+  // box-shadow: 0 0 2px #222;
+  padding: 20px;
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+
+    .dialog-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 12px 20px 12px;      
+    }
+
+    .dialog-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}
+
+.ember-modal-overlay.translucent {
+  background-color: rgba(0,0,0,.75);
+}
+
+.ember-modal-overlay {
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 50;
+}
+
+.ember-modal-dialog {
+  z-index: 50;
+  position: fixed;
+
+  &.ember-modal-dialog-in-place {
+    position: relative;
+  }
+}
