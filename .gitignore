@@ -15,3 +15,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+/frontend/dist
+/frontend/tmp
+/frontend/node_modules
+/frontend/bower_components
