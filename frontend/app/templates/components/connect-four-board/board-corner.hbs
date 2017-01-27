@@ -1,0 +1,15 @@
+<defs>
+  <clipPath id="top-corner">
+    <rect width="{{radius}}" height="{{radius}}" />
+  </clipPath>
+  <clipPath id="bottom-corner">
+    <rect x="0" y="610" width="{{radius}}" height="{{radius}}" />
+  </clipPath>
+</defs>
+{{#if leftEdge}}
+  <circle r="{{radius}}" cx="{{radius}}" cy="{{radius}}" style="{{color}}" clip-path="url(#top-corner)"/>
+  <circle r="{{radius}}" cx="{{radius}}" cy="610" style="{{color}}" clip-path="url(#bottom-corner)"/>
+{{else if rightEdge}}
+  <circle r="{{radius}}" cx="0" cy="{{radius}}" style="{{color}}" clip-path="url(#top-corner)"/>
+  <circle r="{{radius}}" cx="0" cy="610" style="{{color}}" clip-path="url(#bottom-corner)"/>
+{{/if}}
