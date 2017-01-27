@@ -5,6 +5,11 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     // Add options here
+    nodeAssets: {
+      "d3" : {
+        import: ['build/d3.min.js'],
+      }
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
