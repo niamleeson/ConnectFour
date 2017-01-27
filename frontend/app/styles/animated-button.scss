@@ -1,0 +1,26 @@
+.button-wrapper {
+  padding: 20px;
+  position: absolute;
+  top: 0px;
+}
+
+.button {
+  border: 8px transparent;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  outline: none;
+  border-radius: 2px;
+
+  &.big-button {
+    min-width: 150px;    
+  }
+
+  &.mouse-over {
+    transform: scale(1.05);
+    transition: all 50ms;
+  }
+}
