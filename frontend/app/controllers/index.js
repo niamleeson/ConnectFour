@@ -5,6 +5,12 @@ export default Ember.Controller.extend({
   gameState: Ember.inject.service(),
   session: Ember.inject.service('session'),
 
+  notAuthenticated: Ember.computed('session.isAuthenticated', function() {
+    return !this.get('session.isAuthenticated');
+  }),
+
+  tooltipText: 'Please sign in to use this feature',
+
   actions: {
     openDifficultyDialog() {
       this.get('modalDialog').openDialog('difficulty-dialog');

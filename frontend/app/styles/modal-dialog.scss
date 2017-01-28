@@ -8,18 +8,42 @@
     display: flex;
     flex-direction: column;
 
+    &.wider-dialog {
+      min-width: 350px;
+    }
+
     .dialog-body {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin: 0 12px 20px 12px;      
+      margin: 0px 4px 20px 4px;
+
+      .dialog-body-text {
+        margin-bottom: 20px;
+      } 
     }
 
     .dialog-footer {
       display: flex;
       flex-direction: row;
       justify-content: center;
+
+      button {
+        margin: 0px 4px 0px 4px;
+      }
+    }
+
+    .dialog-etc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 4px 0px 4px;
+
+      .dialog-etc-text {
+        margin: 0 0 8px 0;
+      }
     }
   }
 }

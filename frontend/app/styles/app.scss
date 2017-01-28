@@ -4,9 +4,12 @@
 @import "content";
 @import "body";
 @import "buttons";
-@import "account-icon";
+@import "sign-in-button";
 @import "connect-four-board";
 @import "modal-dialog";
+@import "form";
+@import "ember-bootstrap/bootstrap";
+@import "bootstrap-tooltip";
 
 body {
   font-family: 'Roboto', sans-serif;

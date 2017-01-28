@@ -1,0 +1,26 @@
+.sign-in-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+    cursor: pointer;
+
+    .sign-in-text {
+      margin: 8px;
+    }
+
+    .account-icon {
+      width: 50px;
+      height: 50px;
+      text-decoration: none;
+      outline: none;
+      will-change: transform;
+    }
+
+    &:hover {
+      .account-icon {
+        transform: scale(1.05);
+        transition: all 50ms;
+      }
+    }
+  }

@@ -1,0 +1,30 @@
+form {
+  width: 100%;
+  
+  input{
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+            box-sizing: border-box;
+    
+    box-shadow: none !important;
+    display: inline-block;
+    background: #fdfdfd;
+    vertical-align: middle;
+    padding: 5px 6px 4px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.1) inset;
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.1) inset;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1) inset;
+    border: 1px solid #c1c1c1;
+    font-size: 13px;
+    color: #333;
+    width: 200px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 4px 0;
+  }
+}

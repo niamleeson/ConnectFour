@@ -3,9 +3,13 @@
     {{#if session.isAuthenticated}}
       authenticated
     {{else}}
-      nonono
+      <div {{action "openLoginDialog"}} class="sign-in-button">
+       <div class="sign-in-text">
+         Sign In
+        </div>
+         <img class="account-icon" src="images/account_icon.png"> 
+      </div>
     {{/if}}    
-    <img {{action "openLoginDialog"}} class="account-icon" src="images/account_icon.png">
   </div>
   <div class="body">
     <div>
@@ -14,9 +18,9 @@
     <div class="buttons">
       {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "openDifficultyDialog")}} Difficulty: {{gameState.difficulty}} {{/ui/animated-button}}
       {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "openConfirmationDialog")}} New Game {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Save Game {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Load Game {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Replay {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800"}} Save Game {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800"}} Load Game {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800"}} Replay {{/ui/animated-button}}
     </div>
   </div>
 </div>
