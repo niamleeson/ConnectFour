@@ -44,3 +44,5 @@ gem 'ember-cli-rails'
 gem 'rails_12factor', group: [:staging, :production]
 
 gem 'knock'
+
+gem 'active_model_serializers', '~> 0.10.0'

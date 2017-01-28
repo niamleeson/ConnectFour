@@ -21,14 +21,14 @@ export default Base.extend({
     });
   },
 
-  authenticate(creds) {
-    const { identification, password } = creds;
+  authenticate(identification, password) {
     const data = JSON.stringify({
       auth: {
         email: identification,
-        password
+        password: password
       }
     });
+
     const requestOptions = {
       url: this.tokenEndpoint,
       type: 'POST',

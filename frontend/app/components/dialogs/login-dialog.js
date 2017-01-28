@@ -36,7 +36,6 @@ export default Ember.Component.extend(Dialog, {
     },
     saveNewUser() {
       let newUser = this.get('user');
-      console.log(newUser);
 
       newUser.save()
         .then(() => {

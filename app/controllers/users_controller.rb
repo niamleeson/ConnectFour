@@ -1,16 +1,20 @@
 class UsersController < ApplicationController
   def create
     user = User.create(user_params)
-    # render json: serialize_model(@contact, {include: "contact-parent"})
-    render json: {data: {}}
-
-    # gotta return serialized user account
+    options = {}
+    render json: ActiveModelSerializers::SerializableResource.new(user, options).as_json
   end
 
   private
 
   def user_params
-    params.permit(:first_name, :last_name, :email, :password, :password_confirmation)
-    # params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)    
+    data = {}
+    data[:first_name] = params["data"]["attributes"]["first-name"]
+    data[:last_name] = params["data"]["attributes"]["last-name"]
+    data[:email] = params["data"]["attributes"]["email"]
+    data[:password] = params["data"]["attributes"]["password"]
+    data[:password_confirmation] = params["data"]["attributes"]["password-confirmation"]
+
+    return data
   end
 end
