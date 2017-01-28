@@ -1,7 +1,12 @@
 <div class="content">
   <div class="header">
     {{#if session.isAuthenticated}}
-      authenticated
+      <div {{action "openLoginDialog"}} class="sign-in-button">
+       <div class="sign-in-text">
+         Welcome
+        </div>
+         <img class="account-icon" src="images/account_icon.png"> 
+      </div>
     {{else}}
       <div {{action "openLoginDialog"}} class="sign-in-button">
        <div class="sign-in-text">

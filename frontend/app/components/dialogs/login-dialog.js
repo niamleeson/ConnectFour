@@ -36,11 +36,17 @@ export default Ember.Component.extend(Dialog, {
     },
     saveNewUser() {
       let newUser = this.get('user');
+      let credentials = {
+        identification: newUser.get('email'),
+        password: newUser.get('password')
+      }
 
       newUser.save()
         .then(() => {
           this.get('session')
-            .authenticate('authenticator:jwt', newUser.get('email'), newUser.get('password'))
+            .authenticate('authenticator:jwt', credentials).then(() => {
+              this.closeDialog();
+            })
             .catch((reason) => {
               this.set('errorMessage', reason.error || reason);
             });

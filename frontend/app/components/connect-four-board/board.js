@@ -49,7 +49,8 @@ export default Ember.Component.extend({
           return d3.interpolateString(`translate(0, ${startY})`, `translate(0, ${endY})`);
         })
         .on('end', () => {
-          // console.log('disc animation ended');
+          console.log('disc animation ended');
+          this.get('gameState').requestCompPosition(index);
         });
     }
   },

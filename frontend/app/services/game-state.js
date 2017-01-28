@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  ajax: Ember.inject.service(),
   humanPlaying: true,
   compPlaying: false,
   difficulty: 3,
@@ -30,5 +31,9 @@ export default Ember.Service.extend({
     ]);
     this.set('openRows', [5, 5, 5, 5, 5, 5, 5]);
     this.set('newGame', true);
+  },
+
+  requestCompPosition(colIndex) {
+    
   }
 });

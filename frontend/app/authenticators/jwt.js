@@ -21,11 +21,13 @@ export default Base.extend({
     });
   },
 
-  authenticate(identification, password) {
+  authenticate(cred) {
+    const {identification, password} = cred;
+
     const data = JSON.stringify({
       auth: {
         email: identification,
-        password: password
+        password
       }
     });
 

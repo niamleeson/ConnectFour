@@ -14,20 +14,22 @@ export default Ember.Component.extend({
   tooltipText: null,
   buttonDisabled: false,
 
-  // initTooltip: Ember.on('didRender', function() {
-  //   if (this.get('tooltipEnabled')) {
-  //     this.$().tooltip({title: this.get('tooltipText')});
-  //   }
-  // }),
-
   mouseEnter() {
     if (!this.get('buttonDisabled')) {
       this.set('mouseOver', true);
+    } else {
+      if (this.get('tooltipEnabled')) {
+        this.set('showTooltip', true);
+      }
     }
   },
   mouseLeave() {
     if (!this.get('buttonDisabled')) {
       this.set('mouseOver', false);   
+    } else {
+      if (this.get('tooltipEnabled')) {
+        this.set('showTooltip', false);
+      }
     } 
   },
   mouseDown() {
