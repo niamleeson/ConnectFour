@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def create
     user = User.create(user_params)
-    return head :ok
+    # render json: serialize_model(@contact, {include: "contact-parent"})
+    render json: {data: {}}
 
     # gotta return serialized user account
   end
