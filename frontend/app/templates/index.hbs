@@ -1,18 +1,19 @@
 <div class="content">
   <div class="header">
     {{#if session.isAuthenticated}}
-      Welcome Jay <a {{action 'invalidateSession'}}>Logout</a>
+      authenticated
     {{else}}
-    {{/if}}
-    <img class="account-icon" src="images/account_icon.png">
+      nonono
+    {{/if}}    
+    <img {{action "openLoginDialog"}} class="account-icon" src="images/account_icon.png">
   </div>
   <div class="body">
     <div>
-      {{connect-four-board/board fillColor='#00BCD4'}}
+      {{connect-four-board/board fillColor="#00BCD4"}}
     </div>
     <div class="buttons">
-      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "chooseDifficulty")}} Difficulty: {{gameState.difficulty}} {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "createNewGame")}} New Game {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "openDifficultyDialog")}} Difficulty: {{gameState.difficulty}} {{/ui/animated-button}}
+      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "openConfirmationDialog")}} New Game {{/ui/animated-button}}
       {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Save Game {{/ui/animated-button}}
       {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Load Game {{/ui/animated-button}}
       {{#ui/animated-button bigButton=true fillColor="#FF9800"}} Replay {{/ui/animated-button}}

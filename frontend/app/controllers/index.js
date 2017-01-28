@@ -6,14 +6,20 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
 
   actions: {
-    chooseDifficulty() {
+    openDifficultyDialog() {
       this.get('modalDialog').openDialog('difficulty-dialog');
     },
-    createNewGame() {
+    openConfirmationDialog() {
       this.get('modalDialog').openDialog('confirmation-dialog')
         .then(() => {
           this.get('gameState').createNewGame();
         });
+    },
+    openLoginDialog() {
+      this.get('modalDialog').openDialog('login-dialog')
+        .then(() => {
+          //login?
+        })
     },
     closeDialog() {
       this.get('modalDialog').closeDialog();

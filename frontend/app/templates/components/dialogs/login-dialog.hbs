@@ -1,0 +1,61 @@
+{{#modal-dialog 
+  close="cancel"
+  targetAttachment="center"
+  translucentOverlay=true}}
+  {{#if session.isAuthenticated}}
+    {{#ui/animated-button bigButton=true fillColor="#D32F2F" clicked=(action "signOut")}} Sign Out {{/ui/animated-button}}
+    {{#ui/animated-button bigButton=true fillColor="#E0E0E0" clicked=(action "cancel")}} Cancel {{/ui/animated-button}}
+  {{else}}
+    {{#if registering}}
+      <div class="dialog-content">
+        <div class="dialog-body">
+          <form {{action "saveNewUser" on="submit"}}>
+            <label for="firstName">First name</label>
+            {{input value=user.firstName placeholder="First name"}}
+            <label for="lastName">Last name</label>
+            {{input value=user.lastName placeholder="Last name"}}
+            <label for="email">Email</label>
+            {{input value=user.email placeholder="Email"}}
+            <label for="password">Password</label>
+            {{input value=user.password type="password" placeholder="Password"}}
+            <label for="passwordConfirmation">Password Confirmation</label>
+            {{input value=user.passwordConfirmation type="password" placeholder="Retype password"}}
+            <button type="submit">Login</button>
+          </form>
+          {{#if errorMessage}}
+            {{errorMessage}}
+          {{/if}}
+        </div>
+        <div class="dialog-footer">
+          {{#ui/animated-button bigButton=true fillColor="#D32F2F" clicked=(action "saveNewUser")}} Register {{/ui/animated-button}}
+          {{#ui/animated-button bigButton=true fillColor="#E0E0E0" clicked=(action "cancel")}} Cancel {{/ui/animated-button}}  
+        </div>
+      </div>  
+    {{else}}
+      <div class="dialog-content">
+        <div class="dialog-body">
+          Please sign in to your account.
+          <form {{action "signIn" on="submit"}}>
+            <label for="identification">Email</label>
+            {{input value=identification placeholder="Email" class="form-control"}}
+            <label for="password">Password</label>
+            {{input value=password type="password" placeholder="Password"}}
+            <button type="submit">Login</button>
+          </form>
+      {{#if errorMessage}}
+        {{errorMessage}}
+      {{/if}}
+        </div>
+        <div class="dialog-footer">
+          {{#ui/animated-button bigButton=true fillColor="#D32F2F" clicked=(action "confirm")}} Sign In {{/ui/animated-button}}
+          {{#ui/animated-button bigButton=true fillColor="#E0E0E0" clicked=(action "cancel")}} Cancel {{/ui/animated-button}}  
+        </div>
+        <div>
+          To register, click here.
+          {{#ui/animated-button bigButton=true fillColor="#D32F2F" clicked=(action "openRegisterForm")}} Register {{/ui/animated-button}}
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+  
+{{/modal-dialog}}

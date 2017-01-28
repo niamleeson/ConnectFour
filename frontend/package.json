@@ -16,6 +16,7 @@
     "postinstall": "node_modules/.bin/bower install"
   },
   "devDependencies": {
+    "active-model-adapter": "2.1.1",
     "broccoli-asset-rev": "^2.4.5",
     "d3": "4.2.3",
     "ember-ajax": "^2.4.1",
