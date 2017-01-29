@@ -18,6 +18,9 @@
   </div>
   <div class="body">
     <div>
+        <div class="board-message">
+          {{gameState.gameStateText}}
+        </div>
       {{connect-four-board/board fillColor="#00BCD4"}}
     </div>
     <div class="buttons">
@@ -25,7 +28,6 @@
       {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "openConfirmationDialog")}} New Game {{/ui/animated-button}}
       {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800"}} Save Game {{/ui/animated-button}}
       {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800"}} Load Game {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800"}} Replay {{/ui/animated-button}}
     </div>
   </div>
 </div>

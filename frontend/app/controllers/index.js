@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   modalDialog: Ember.inject.service(),
   gameState: Ember.inject.service(),
-  session: Ember.inject.service('session'),
+  session: Ember.inject.service(),
 
   notAuthenticated: Ember.computed('session.isAuthenticated', function() {
     return !this.get('session.isAuthenticated');

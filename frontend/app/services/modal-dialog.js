@@ -10,7 +10,7 @@ export default Ember.Service.extend({
       this.set('dialogData', dialogData);
       this.set('dialogPath', `dialogs/${dialogPath}`);
       this.set('isShowingDialog', true);
-    })
+    });
   },
   
   closeDialog(returnData) {

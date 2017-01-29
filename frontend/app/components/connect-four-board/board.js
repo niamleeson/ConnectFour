@@ -3,17 +3,22 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   gameState: Ember.inject.service(),
   classNames: ['connect-four-board'],
+  classNameBindings: ['boardDisabled'],
+  boardDisabled: Ember.computed('gameState.disabled', function () {
+    return this.get('gameState.disabled');
+  }),
 
-  resetGame: Ember.observer('gameState.newGame', function() {
+  resetGame: Ember.observer('gameState.newGame', function () {
     if (this.get('gameState.newGame')) {
       this.$('#discs').empty();
     }
   }),
 
   insertDisc(index) {
-    let openRows = this.get('gameState.openRows');
-    let openRow = this.get('gameState.getOpenRow')(openRows, index);
-    let color;
+    let openCols = this.get('gameState.openCols');
+    let openCol = this.get('gameState.getOpenCol')(openCols, index);
+    let board = this.get('gameState.board');
+    let color, player;
 
     if (this.get('gameState.newGame')) {
       this.set('gameState.newGame', false);
@@ -21,21 +26,24 @@ export default Ember.Component.extend({
 
     if (this.get('gameState.humanPlaying')) {
       color = '#D32F2F';
-      this.set('gameState.humanPlaying', false);
-      this.set('gameState.compPlaying', true);
+      player = 1;
+      this.set('gameState.playerInputDisabled', true);
     } else if (this.get('gameState.compPlaying')) {
       color = '#FFCA28';
-      this.set('gameState.humanPlaying', true);
-      this.set('gameState.compPlaying', false);
+      player = 2;
+      this.set('gameState.playerInputDisabled', true);
     }
 
-    if (openRow >= 0) {
+    if (openCol >= 0) {
       let startX = index * 100 + 60;
       let startY = 60;
-      let endY = openRow * 100 + 100;
-      let duration = openRow * 100 + 50;
-      openRows[index]--;
-      this.set('gameState.openRows', openRows);
+      let endY = openCol * 100 + 100;
+      let duration = openCol * 100 + 50;
+
+      board[openCol][index] = player;
+      openCols[index]--;
+      this.set('gameState.openCols', openCols);
+      this.set('gameState.board', board);
 
       d3.select('#discs').append('circle')
         .attr('cx', startX)
@@ -49,15 +57,40 @@ export default Ember.Component.extend({
           return d3.interpolateString(`translate(0, ${startY})`, `translate(0, ${endY})`);
         })
         .on('end', () => {
-          console.log('disc animation ended');
-          this.get('gameState').requestCompPosition(index);
+          if (this.get('gameState.humanPlaying')) {
+            this.get('gameState').setGameStatusToCompPlaying();
+
+            this.get('gameState').requestCompPosition(index)
+              .then((data) => {
+                if (data.win_status === 1) {
+                  this.set('gameState.humanWins', true);
+                  this.set('gameState.playerInputDisabled', true);
+                } else if (data.win_status === 2) {
+                  this.set('gameState.compWins', true);
+                  this.set('gameState.playerInputDisabled', true);
+                }
+                this.insertDisc(data.best_move);
+                this.set('gameState.disabled', false);
+              })
+              .catch(() => {
+                // when something errored, give control back to the player. kind of pointless though.
+                this.get('gameState').setGameStatusToHumanPlaying();
+              });
+          } else if (this.get('gameState.compPlaying')) {
+            this.get('gameState').setGameStatusToHumanPlaying();
+          }
         });
     }
   },
 
   actions: {
     columnClicked(index) {
-      this.insertDisc(index);
+      if (!this.get('gameState.disabled') &&
+        !this.get('gameState.playerInputDisabled') &&
+        !this.get('gameState.compWins') &&
+        !this.get('gameState.humanWins')) {
+        this.insertDisc(index);
+      }
     }
   }
 });

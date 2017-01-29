@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  board_state: MyText
+  open_cols: MyText
+
+two:
+  board_state: MyText
+  open_cols: MyText
