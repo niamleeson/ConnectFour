@@ -71,11 +71,11 @@ export default Ember.Component.extend({
                 if (data.win_status === 1) {
                   this.set('gameState.humanWins', true);
                   this.set('gameState.playerInputDisabled', true);
-                  // this.highlightDiscs(data.winning_combo, 'player');
+                  this.highlightDiscs(data.winning_combo, 'player');
                 } else if (data.win_status === 2) {
                   this.set('gameState.compWins', true);
                   this.set('gameState.playerInputDisabled', true);
-                  // this.highlightDiscs(data.winning_combo, 'comp');
+                  this.highlightDiscs(data.winning_combo, 'comp');
                 }
                 this.insertDisc(data.best_move);
                 this.set('gameState.disabled', false);
@@ -86,21 +86,20 @@ export default Ember.Component.extend({
               });
           } else if (this.get('gameState.compPlaying')) {
             this.get('gameState').setGameStatusToHumanPlaying();
-             this.get('gameState').sendGameState(col)
+            this.get('gameState').sendGameState(col)
               .then((data) => {
                 if (data.win_status === 1) {
                   this.set('gameState.humanWins', true);
                   this.set('gameState.playerInputDisabled', true);
-                  // this.highlightDiscs(data.winning_combo, 'player');
+                  this.highlightDiscs(data.winning_combo, 'player');
                 } else if (data.win_status === 2) {
                   this.set('gameState.compWins', true);
                   this.set('gameState.playerInputDisabled', true);
-                  // this.highlightDiscs(data.winning_combo, 'comp');
+                  this.highlightDiscs(data.winning_combo, 'comp');
                 }
                 this.set('gameState.disabled', false);
               })
               .catch(() => {
-                // when something errored, give control back to the player. kind of pointless though.
                 this.get('gameState').setGameStatusToHumanPlaying();
               });
           }
@@ -109,19 +108,21 @@ export default Ember.Component.extend({
   },
 
   highlightDiscs(winning_combo, player) {
-    let color;
+    if (winning_combo.length) {
+      let color;
 
-    if (player === 'player') {
-      color = this.get('playerWinColor');
-    } else if (player === 'comp') {
-      color = this.get('compWinColor');
-    }
+      if (player === 'player') {
+        color = this.get('playerWinColor');
+      } else if (player === 'comp') {
+        color = this.get('compWinColor');
+      }
 
-    for (let i = 0; i < winning_combo.length; i++) {
-      let id = `disc-${winning_combo[i][0]}-${winning_combo[i][1]}`;
-      d3.select(`#discs ${id}`)
-        .attr('fill', color);
-      console.log(id);
+      for (let i = 0; i < winning_combo.length; i++) {
+        let id = `#disc-${winning_combo[i][0]}-${winning_combo[i][1]}`;
+        d3.select(`#discs ${id}`)
+          .attr('fill', color);
+        console.log(id);
+      }
     }
   },
 

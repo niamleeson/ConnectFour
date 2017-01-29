@@ -127,37 +127,35 @@ class BoardsController < ApplicationController
     end
   end
 
-  def find_winning_combo(best_move, player)
+  def find_winning_combo(last_move, player)
     height = @board.length
     width = @board[0].length
-    row = @open_cols[best_move]
-    @board[row][best_move] = player
+    row = @open_cols[last_move] + 1
+    @board[row][last_move] = player
     sub_str = player.to_s * 4
 
     winning_combos = []
     #check horizontal
     h_loc = @board[row].join().index(sub_str)
     if h_loc.present?
-      combo = [[row, h_loc], [row, h_loc + 1], [row, h_loc + 2], [row, h_loc + 3]]
-      winning_combos.push(combo)
+      winning_combos.push([row, h_loc], [row, h_loc + 1], [row, h_loc + 2], [row, h_loc + 3])
     end
 
     #check vertical
     vert_str = ''
     for r in 0..(height - 1)
-      vert_str += @board[r][best_move].to_s
+      vert_str += @board[r][last_move].to_s
     end
     v_loc = vert_str.index(sub_str)
     if v_loc.present?
-      combo = [[v_loc, best_move], [v_loc + 1, best_move], [v_loc + 2, best_move], [v_loc + 3, best_move]]
-      winning_combos.push(combo)      
+      winning_combos.push([v_loc, last_move], [v_loc + 1, last_move], [v_loc + 2, last_move], [v_loc + 3, last_move])      
     end
 
     #check top-left to bottom-right diagonal
     tl_str = ''
     loc = []
     r = row
-    c = best_move
+    c = last_move
     while r > 0 && c > 0
       r -= 1
       c -= 1
@@ -172,21 +170,20 @@ class BoardsController < ApplicationController
 
     diag_loc = tl_str.index(sub_str)
     if diag_loc.present?
-      combo = [loc[diag_loc], loc[diag_loc + 1], loc[diag_loc + 2], loc[diag_loc + 3]]
-      winning_combos.push(combo)      
+      winning_combos.push(loc[diag_loc], loc[diag_loc + 1], loc[diag_loc + 2], loc[diag_loc + 3])      
     end
 
     #check top-right to bottom-left diagonal
     tr_str = ''
     loc = []
     r = row
-    c = best_move
-    while r > 0 && c < width
+    c = last_move
+    while r >= 0 && c < width
       r -= 1
       c += 1
     end
-
-    while r < height && c > 0
+    
+    while r < height && c >= 0
       tr_str += @board[r][c].to_s
       loc.push([r,c])
       r += 1
@@ -195,12 +192,8 @@ class BoardsController < ApplicationController
 
     diag_loc = tr_str.index(sub_str)
     if diag_loc.present?
-      combo = [loc[diag_loc], loc[diag_loc + 1], loc[diag_loc + 2], loc[diag_loc + 3]]
-      winning_combos.push(combo)
+      winning_combos.push(loc[diag_loc], loc[diag_loc + 1], loc[diag_loc + 2], loc[diag_loc + 3])
     end
-
-    #revert board
-    @board[row][best_move] = 0
 
     return winning_combos
   end
