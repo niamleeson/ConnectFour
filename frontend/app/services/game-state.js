@@ -9,6 +9,8 @@ export default Ember.Service.extend({
   playerInputDisabled: false,
   compWins: false,
   humanWins: false,
+  player: 1,
+  computer: 2,
 
   difficulty: 4,
   board: [
@@ -77,7 +79,7 @@ export default Ember.Service.extend({
     }
   }),
 
-  requestCompPosition(colIndex) {
+  sendGameState(colIndex) {
     if (this.get('session.isAuthenticated')) {
       return new Ember.RSVP.Promise((resolve, reject) => {
         this.get('session').authorize('authorizer:custom', (headerName, headerValue) => {
@@ -87,7 +89,8 @@ export default Ember.Service.extend({
             column: colIndex,
             board: this.get('board'),
             open_cols: this.get('openCols'),
-            difficulty: this.get('difficulty')
+            difficulty: this.get('difficulty'),
+            last_move: colIndex
           };
 
           this.get('ajax').request('/solve', {
@@ -111,7 +114,8 @@ export default Ember.Service.extend({
           column: colIndex,
           board: this.get('board'),
           open_cols: this.get('openCols'),
-          difficulty: this.get('difficulty')
+          difficulty: this.get('difficulty'),
+          last_move: colIndex
         };
 
         this.get('ajax').request('/solve', {

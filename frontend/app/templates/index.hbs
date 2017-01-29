@@ -16,11 +16,11 @@
       </div>
     {{/if}}    
   </div>
+  <div class="message">
+          {{gameState.gameStateText}}
+  </div>
   <div class="body">
     <div>
-        <div class="board-message">
-          {{gameState.gameStateText}}
-        </div>
       {{connect-four-board/board fillColor="#00BCD4"}}
     </div>
     <div class="buttons">

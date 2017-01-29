@@ -1,44 +1,46 @@
 class BoardsController < ApplicationController
   def solve
     # need a better way to get a multidimensional array from ruby strong parameter
-    board = Array.new(6) 
-    board[0] = params[:board]["0"].map{|i| i.to_i}
-    board[1] = params[:board]["1"].map{|i| i.to_i}
-    board[2] = params[:board]["2"].map{|i| i.to_i}
-    board[3] = params[:board]["3"].map{|i| i.to_i}
-    board[4] = params[:board]["4"].map{|i| i.to_i}
-    board[5] = params[:board]["5"].map{|i| i.to_i}
+    @board = Array.new(6) 
+    @board[0] = params[:board]["0"].map{|i| i.to_i}
+    @board[1] = params[:board]["1"].map{|i| i.to_i}
+    @board[2] = params[:board]["2"].map{|i| i.to_i}
+    @board[3] = params[:board]["3"].map{|i| i.to_i}
+    @board[4] = params[:board]["4"].map{|i| i.to_i}
+    @board[5] = params[:board]["5"].map{|i| i.to_i}
     
-    open_cols = params[:open_cols].map{|i| i.to_i}
-    column = params[:column].to_i
-    difficulty = params[:difficulty].to_i
+    @open_cols = params[:open_cols].map{|i| i.to_i}
+    @last_move = params[:last_move].to_i
+    @column = params[:column].to_i
+    @difficulty = params[:difficulty].to_i
 
-    data = solve_best_move(board, open_cols, column, difficulty)
-
-    render json: data
+    #first check if someone already won
+    #if so, render json with win status and winning combo
+    #if not, solve for best move
+    if rate_board(false) == Float::INFINITY
+      winning_combo = find_winning_combo(@last_move, 2)
+      win_status = 2
+      render json: {best_move: nil, win_status: win_status, winning_combo: winning_combo}
+    elsif rate_board(false) == -Float::INFINITY
+      winning_combo = find_winning_combo(@last_move, 1)
+      win_status = 1
+      render json: {best_move: nil, win_status: win_status, winning_combo: winning_combo}      
+    else
+      data = solve_best_move(@board, @open_cols, @column, @difficulty)
+      render json: data      
+    end
   end
 
   private
 
   def solve_best_move(board, open_cols, column, difficulty)
-    @board = board
-    @open_cols = open_cols
     @best_move = 0
     @alpha = -Float::INFINITY
     @beta = Float::INFINITY
-    @difficulty = difficulty
     
-    best_score = minimax(@difficulty, @alpha, @beta, true)
+    best_score = minimax(difficulty, @alpha, @beta, true)
 
-    if best_score == Float::INFINITY
-      win_status = 2
-    elsif best_score == -Float::INFINITY
-      win_status = 1
-    else
-      win_status = 0
-    end
-
-    return {best_move: @best_move, win_status: win_status}
+    return {best_move: @best_move, win_status: nil, winning_combo: nil}
   end
 
   def minimax(depth, alpha, beta, is_comp)
@@ -60,7 +62,6 @@ class BoardsController < ApplicationController
 
         @board[r][c] = 2
         @open_cols[c] -= 1
-        p @board
 
         alpha = [alpha, minimax(depth - 1, alpha, beta, false)].max
 
@@ -124,6 +125,84 @@ class BoardsController < ApplicationController
 
       return beta
     end
+  end
+
+  def find_winning_combo(best_move, player)
+    height = @board.length
+    width = @board[0].length
+    row = @open_cols[best_move]
+    @board[row][best_move] = player
+    sub_str = player.to_s * 4
+
+    winning_combos = []
+    #check horizontal
+    h_loc = @board[row].join().index(sub_str)
+    if h_loc.present?
+      combo = [[row, h_loc], [row, h_loc + 1], [row, h_loc + 2], [row, h_loc + 3]]
+      winning_combos.push(combo)
+    end
+
+    #check vertical
+    vert_str = ''
+    for r in 0..(height - 1)
+      vert_str += @board[r][best_move].to_s
+    end
+    v_loc = vert_str.index(sub_str)
+    if v_loc.present?
+      combo = [[v_loc, best_move], [v_loc + 1, best_move], [v_loc + 2, best_move], [v_loc + 3, best_move]]
+      winning_combos.push(combo)      
+    end
+
+    #check top-left to bottom-right diagonal
+    tl_str = ''
+    loc = []
+    r = row
+    c = best_move
+    while r > 0 && c > 0
+      r -= 1
+      c -= 1
+    end
+
+    while r < height && c < width
+      tl_str += @board[r][c].to_s
+      loc.push([r,c])
+      r += 1
+      c += 1
+    end
+
+    diag_loc = tl_str.index(sub_str)
+    if diag_loc.present?
+      combo = [loc[diag_loc], loc[diag_loc + 1], loc[diag_loc + 2], loc[diag_loc + 3]]
+      winning_combos.push(combo)      
+    end
+
+    #check top-right to bottom-left diagonal
+    tr_str = ''
+    loc = []
+    r = row
+    c = best_move
+    while r > 0 && c < width
+      r -= 1
+      c += 1
+    end
+
+    while r < height && c > 0
+      tr_str += @board[r][c].to_s
+      loc.push([r,c])
+      r += 1
+      c -= 1
+    end
+
+    diag_loc = tr_str.index(sub_str)
+    if diag_loc.present?
+      combo = [loc[diag_loc], loc[diag_loc + 1], loc[diag_loc + 2], loc[diag_loc + 3]]
+      winning_combos.push(combo)
+    end
+
+    #revert board
+    @board[row][best_move] = 0
+
+    return winning_combos
   end
 
   def rate_board(is_comp)
