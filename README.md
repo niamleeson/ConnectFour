@@ -2,8 +2,8 @@
 
 The application is built with Ruby on Rails framework and Ember JavaScript framework.
 
-A player is able to select a difficulty for the connect four bot.
-Higher difficulty will lead to slower bot response time due to the depth of trees it needs to go through.
+A player is able to select a difficulty for the connect four "bot", which is technically a brute force algorithm called minimax.
+Higher difficulty will lead to slower server response time due to the depth of trees the algorithm needs to go through.
 
 Currently, the player's color is red and the computer's color is yellow,
 but the functionality to change this will be added in the future.
