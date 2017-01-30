@@ -18,7 +18,7 @@ Features to be included in the future:
 
 * Replay functionality to watch any past games.
 
-* Displaying tie status.
+* Displaying the tie status.
 
 * A form to update a user's info.
 
