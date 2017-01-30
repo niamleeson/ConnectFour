@@ -46,6 +46,9 @@ export default Ember.Controller.extend({
     },
     openSaveGameDialog() {
       this.get('modalDialog').openDialog('save-game-dialog');
+    },
+    openLoadGameDialog() {
+      this.get('modalDialog').openDialog('load-game-dialog');
     }
   }
 });

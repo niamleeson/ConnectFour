@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   post 'solve', to: 'boards#solve'
   post 'save_game', to: 'boards#save_game'
+  # get 'users/me', to: 'users#current_user'
 end

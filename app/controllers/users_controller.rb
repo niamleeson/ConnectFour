@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  def index
+    if current_user
+      render json: ActiveModelSerializers::SerializableResource.new(current_user, {}).as_json
+    else
+      render json: { error: 'user not found' }
+    end
+  end
+
   def create
     user = User.create(user_params)
     options = {}
