@@ -3,17 +3,47 @@
   targetAttachment="center"
   translucentOverlay=true}}
   {{#if session.isAuthenticated}}
-    <div class="dialog-content">
+    {{#if confirmDelete}}
+      <div class="dialog-content">
+        <div class="dialog-body">
+         Are you sure you want to delete this game?
+        </div>
+        <div class="dialog-footer">
+          {{#ui/animated-button bigButton=true fillColor="#D32F2F" clicked=(action "commitDelete")}} Delete Game {{/ui/animated-button}}
+          {{#ui/animated-button bigButton=true fillColor="#D2D0D0" clicked=(action "cancelDelete")}} Cancel {{/ui/animated-button}}  
+        </div>
+      </div>  
+    {{else}}
+      <div class="dialog-content">
         <div class="dialog-body">
          {{#each boards as |board index|}}
-            {{ui/game-list board=board selectedIndex=selectedIndex index=index gameSelected=(action "gameSelected")}}
+            {{ui/game-list
+            board=board
+            selectedIndex=selectedIndex
+            index=index
+            gameSelected=(action "gameSelected")
+            deleteGame=(action "deleteGame")}}
          {{/each}}
         </div>
         <div class="dialog-footer">
-          {{#ui/animated-button bigButton=true fillColor="#1976D2" clicked=(action "loadGame")}} Load game {{/ui/animated-button}}
-          {{#ui/animated-button bigButton=true fillColor="#D2D0D0" clicked=(action "cancel")}} Cancel {{/ui/animated-button}}  
+          {{#ui/animated-button
+          bigButton=true
+          fillColor="#1976D2"
+          tooltipEnabled=boardNotSelected
+          tooltipText="Please select a game first"
+          buttonDisabled=boardNotSelected
+          clicked=(action "loadGame")}}
+            Load game
+          {{/ui/animated-button}}
+          {{#ui/animated-button
+          bigButton=true
+          fillColor="#D2D0D0"
+          clicked=(action "cancel")}}
+            Cancel
+          {{/ui/animated-button}}  
         </div>
-      </div>
+      </div>  
+    {{/if}}
   {{else}}
     Please sign in before trying to save the game.
   {{/if}}

@@ -1,1 +1,4 @@
-{{board.name}}
+<div class="game-name">{{board.name}}</div>
+{{#ui/animated-button class='delete-button' smallButton=true fillColor="#D32F2F" clicked=(action "deleteGame")}}
+  X
+{{/ui/animated-button}}

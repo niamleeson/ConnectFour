@@ -1,11 +1,4 @@
 class BoardsController < ApplicationController
-  def load_games
-    user = User.find(params["user_id"].to_i)
-    boards = Board.where(user: user).all
-
-    render json: ActiveModelSerializers::SerializableResource.new(boards, {}).as_json
-  end
-
   def create
     user = User.find(params["data"]["relationships"]["user"]["data"]["id"].to_i)
     board = Board.new(board_params)
@@ -13,6 +6,13 @@ class BoardsController < ApplicationController
     board.save!
 
     render json: ActiveModelSerializers::SerializableResource.new(board, {}).as_json
+  end
+
+  def destroy
+    board = Board.find(params["id"].to_i)
+    board.destroy
+
+    render status: 204
   end
 
   def save_game
@@ -33,6 +33,13 @@ class BoardsController < ApplicationController
     @open_cols = params[:open_cols].map{|i| i.to_i}
 
     @board_model = Board.create!(name: @name, board_state: @board_state, open_cols: @open_cols)
+  end
+
+  def load_games
+    user = User.find(params["user_id"].to_i)
+    boards = Board.where(user: user).all
+
+    render json: ActiveModelSerializers::SerializableResource.new(boards, {}).as_json
   end
 
   def solve

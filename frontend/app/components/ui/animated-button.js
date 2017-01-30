@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'button',
   classNames: ['button'],
-  classNameBindings: ['mouseOver', 'bigButton', 'buttonDisabled'],
+  classNameBindings: ['mouseOver', 'bigButton', 'smallButton', 'buttonDisabled'],
   attributeBindings: ['style'],
   style: Ember.computed('fillColor', function() {
     return Ember.String.htmlSafe(`background-color:${this.get('fillColor')};`);
@@ -33,7 +33,7 @@ export default Ember.Component.extend({
     } 
   },
   mouseDown() {
-    if (!this.get('v')) {
+    if (!this.get('buttonDisabled')) {
       this.set('mouseOver', false);
       if (Ember.isPresent(this.get('clicked'))) {
         if (Ember.isPresent(this.get('data'))){

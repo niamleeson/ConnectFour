@@ -27,4 +27,8 @@
     transform: scale(1.05);
     transition: all 50ms;
   }
+
+  &.small-button {
+    padding: 4px 12px;
+  }
 }

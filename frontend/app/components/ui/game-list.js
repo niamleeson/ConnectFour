@@ -14,5 +14,11 @@ export default Ember.Component.extend({
   board: null,
   click() {
     this.gameSelected(this.get('index'), this.get('board'));
+  },
+
+  actions: {
+    deleteGame() {
+      this.deleteGame(this.get('board'));
+    }
   }
 });
