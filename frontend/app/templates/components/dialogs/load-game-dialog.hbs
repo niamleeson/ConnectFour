@@ -3,9 +3,11 @@
   targetAttachment="center"
   translucentOverlay=true}}
   {{#if session.isAuthenticated}}
-    <div class="dialog-content wider-dialog">
+    <div class="dialog-content">
         <div class="dialog-body">
-         
+         {{#each boards as |board index|}}
+            {{ui/game-list board=board selectedIndex=selectedIndex index=index gameSelected=(action "gameSelected")}}
+         {{/each}}
         </div>
         <div class="dialog-footer">
           {{#ui/animated-button bigButton=true fillColor="#1976D2" clicked=(action "loadGame")}} Load game {{/ui/animated-button}}

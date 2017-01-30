@@ -1,0 +1,14 @@
+.game-list {
+  border: 1px solid rgba(0,0,0,0.1);
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 500ms;  
+
+  &.selected {
+    background-color: #FF9800;
+  }
+}

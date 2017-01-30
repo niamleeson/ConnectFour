@@ -1,6 +1,9 @@
 class BoardsController < ApplicationController
-  def index
-    
+  def load_games
+    user = User.find(params["user_id"].to_i)
+    boards = Board.where(user: user).all
+
+    render json: ActiveModelSerializers::SerializableResource.new(boards, {}).as_json
   end
 
   def create
@@ -8,15 +11,15 @@ class BoardsController < ApplicationController
     board = Board.new(board_params)
     board.user = user
     board.save!
-    options = {}
-    render json: ActiveModelSerializers::SerializableResource.new(board, options).as_json
+
+    render json: ActiveModelSerializers::SerializableResource.new(board, {}).as_json
   end
 
   def save_game
-    if params[:name].present?
-      @name = params[:name]
-    else
+    if params[:name].blank?
       @name = "game-#{Time.now.to_i}"
+    else
+      @name = params[:name]
     end
 
     @board_state = Array.new(6) 

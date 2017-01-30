@@ -18,17 +18,43 @@
     {{/if}}    
   </div>
   <div class="message">
-          {{gameState.gameStateText}}
+    {{gameState.gameStateText}}
   </div>
   <div class="body">
     <div>
       {{connect-four-board/board fillColor="#00BCD4"}}
     </div>
     <div class="buttons">
-      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "openDifficultyDialog")}} Difficulty: {{gameState.difficulty}} {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true fillColor="#FF9800" clicked=(action "openConfirmationDialog")}} New Game {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800" clicked=(action "openSaveGameDialog")}} Save Game {{/ui/animated-button}}
-      {{#ui/animated-button bigButton=true tooltipEnabled=notAuthenticated tooltipText=tooltipText buttonDisabled=notAuthenticated fillColor="#FF9800" clicked=(action "openLoadGameDialog")}} Load Game {{/ui/animated-button}}
+      {{#ui/animated-button
+      bigButton=true
+      fillColor="#FF9800"
+      clicked=(action "openDifficultyDialog")}}
+        Difficulty: {{gameState.difficulty}}
+      {{/ui/animated-button}}
+      {{#ui/animated-button
+      bigButton=true
+      fillColor="#FF9800"
+      clicked=(action "openConfirmationDialog")}}
+        New Game
+      {{/ui/animated-button}}
+      {{#ui/animated-button
+      bigButton=true
+      tooltipEnabled=notAuthenticated
+      tooltipText=tooltipText
+      buttonDisabled=notAuthenticated
+      fillColor="#FF9800"
+      clicked=(action "openSaveGameDialog")}}
+        Save Game
+      {{/ui/animated-button}}
+      {{#ui/animated-button
+      bigButton=true
+      tooltipEnabled=notAuthenticated
+      tooltipText=tooltipText
+      buttonDisabled=notAuthenticated
+      fillColor="#FF9800"
+      clicked=(action "openLoadGameDialog")}}
+        Load Game
+      {{/ui/animated-button}}
     </div>
   </div>
 </div>

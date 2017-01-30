@@ -4,7 +4,7 @@ import Dialog from 'frontend/mixins/dialog';
 export default Ember.Component.extend(Dialog, {
   store: Ember.inject.service(),
   currentUser: Ember.inject.service(),
-  session: Ember.inject.service('session'),
+  session: Ember.inject.service(),
   registering: false,
   user: null,
 
