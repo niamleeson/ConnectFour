@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   mount_ember_app :frontend, to: "/"
 
   post 'solve', to: 'boards#solve'
+  post 'save_game', to: 'boards#save_game'
 end

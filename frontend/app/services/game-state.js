@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  store: Ember.inject.service(),
   session: Ember.inject.service(),
   ajax: Ember.inject.service(),
   humanPlaying: true,

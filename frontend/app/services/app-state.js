@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  currentUser: null
+  currentUser: null,
+  flashMessage: 'helllloooo',
+  flashMessageType: 'success',
+  flashMessageShown: false
 });

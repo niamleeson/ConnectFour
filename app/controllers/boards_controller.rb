@@ -1,4 +1,24 @@
 class BoardsController < ApplicationController
+  def save_game
+    if params[:name].present?
+      @name = params[:name]
+    else
+      @name = "game-#{Time.now.to_i}"
+    end
+
+    @board_state = Array.new(6) 
+    @board_state[0] = params[:board_state]["0"].map{|i| i.to_i}
+    @board_state[1] = params[:board_state]["1"].map{|i| i.to_i}
+    @board_state[2] = params[:board_state]["2"].map{|i| i.to_i}
+    @board_state[3] = params[:board_state]["3"].map{|i| i.to_i}
+    @board_state[4] = params[:board_state]["4"].map{|i| i.to_i}
+    @board_state[5] = params[:board_state]["5"].map{|i| i.to_i}
+    
+    @open_cols = params[:open_cols].map{|i| i.to_i}
+
+    @board_model = Board.create!(name: @name, board_state: @board_state, open_cols: @open_cols)
+  end
+
   def solve
     # need a better way to get a multidimensional array from ruby strong parameter
     @board = Array.new(6) 

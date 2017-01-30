@@ -121,7 +121,51 @@ export default Ember.Component.extend({
         let id = `#disc-${winning_combo[i][0]}-${winning_combo[i][1]}`;
         d3.select(`#discs ${id}`)
           .attr('fill', color);
-        console.log(id);
+      }
+    }
+  },
+
+  loadBoard(board) {
+    this.set('gameState.board', board);
+
+    let openCols = new Array(7);
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (openCols[c] === undefined && board[r][c] !== 0) {
+          openCols[c] = r - 1;
+        }
+      }
+    }
+
+    for (let i = 0; i < openCols.length; i++) {
+      if (openCols[i] === undefined) {
+        openCols[i] = 5;
+      }
+    }
+
+    this.set('gameState.openCols', openCols);
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let X = c * 100 + 60;
+        let Y = r * 100 + 100;
+
+        if (board[r][c] === 1) {
+          d3.select('#discs').append('circle')
+            .attr('id', `disc-${r}-${c}`)
+            .attr('cx', X)
+            .attr('cy', Y)
+            .attr('r', 45)
+            .attr('fill', this.get('playerColor'));
+        } else if (board[r][c] === 1) {
+          d3.select('#discs').append('circle')
+            .attr('id', `disc-${r}-${c}`)
+            .attr('cx', X)
+            .attr('cy', Y)
+            .attr('r', 45)
+            .attr('fill', this.get('compColor'));
+        }
       }
     }
   },

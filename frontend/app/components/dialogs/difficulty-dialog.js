@@ -40,7 +40,7 @@ export default Ember.Component.extend(Dialog, {
     difficultySelected(difficulty) {
       this.set('gameState.difficulty', difficulty);
       //maybe create a new game?
-      this.closeDialog();
+      this.closeDialog(difficulty);
     },
     cancel() {
       this.closeDialogAndReject();
