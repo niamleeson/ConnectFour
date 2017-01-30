@@ -28,6 +28,7 @@ export default Ember.Service.extend({
     return openCols[column];
   },
   newGame: true,
+  loadGame: false,
 
   createNewGame() {
     this.set('board', [

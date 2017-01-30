@@ -125,50 +125,57 @@ export default Ember.Component.extend({
     }
   },
 
-  loadBoard(board) {
-    this.set('gameState.board', board);
+  loadBoard: Ember.observer('gameState.loadGame', function () {
+    if (this.get('gameState.loadGame')) {
+      this.$('#discs').empty();
+      this.set('gameState.loadGame', false);
+      this.set('gameState.newGame', false);
+      let board = this.get('gameState.board');
+      let rows = board.length;
+      let cols = board[0].length;
 
-    let openCols = new Array(7);
+      let openCols = new Array(7);
 
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        if (openCols[c] === undefined && board[r][c] !== 0) {
-          openCols[c] = r - 1;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          if (openCols[c] === undefined && board[r][c] !== 0) {
+            openCols[c] = r - 1;
+          }
+        }
+      }
+
+      for (let i = 0; i < openCols.length; i++) {
+        if (openCols[i] === undefined) {
+          openCols[i] = 5;
+        }
+      }
+
+      this.set('gameState.openCols', openCols);
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          let X = c * 100 + 60;
+          let Y = r * 100 + 160;
+
+          if (board[r][c] === 1) {
+            d3.select('#discs').append('circle')
+              .attr('id', `disc-${r}-${c}`)
+              .attr('cx', X)
+              .attr('cy', Y)
+              .attr('r', 45)
+              .attr('fill', this.get('playerColor'));
+          } else if (board[r][c] === 2) {
+            d3.select('#discs').append('circle')
+              .attr('id', `disc-${r}-${c}`)
+              .attr('cx', X)
+              .attr('cy', Y)
+              .attr('r', 45)
+              .attr('fill', this.get('compColor'));
+          }
         }
       }
     }
-
-    for (let i = 0; i < openCols.length; i++) {
-      if (openCols[i] === undefined) {
-        openCols[i] = 5;
-      }
-    }
-
-    this.set('gameState.openCols', openCols);
-
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        let X = c * 100 + 60;
-        let Y = r * 100 + 100;
-
-        if (board[r][c] === 1) {
-          d3.select('#discs').append('circle')
-            .attr('id', `disc-${r}-${c}`)
-            .attr('cx', X)
-            .attr('cy', Y)
-            .attr('r', 45)
-            .attr('fill', this.get('playerColor'));
-        } else if (board[r][c] === 1) {
-          d3.select('#discs').append('circle')
-            .attr('id', `disc-${r}-${c}`)
-            .attr('cx', X)
-            .attr('cy', Y)
-            .attr('r', 45)
-            .attr('fill', this.get('compColor'));
-        }
-      }
-    }
-  },
+  }),
 
   actions: {
     columnClicked(index) {

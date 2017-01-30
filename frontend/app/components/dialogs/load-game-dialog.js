@@ -7,6 +7,7 @@ export default Ember.Component.extend(Dialog, {
   currentUser: Ember.inject.service(),
   ajax: Ember.inject.service(),
   appState: Ember.inject.service(),
+  gameState: Ember.inject.service(),
   boards: [],
   board: null,
 
@@ -47,8 +48,10 @@ export default Ember.Component.extend(Dialog, {
     },
     loadGame() {
       let board = this.get('board');
-
-      
+      this.set('gameState.board', board.get('boardState'));
+      this.set('gameState.openCols', board.get('openCols'));
+      this.set('gameState.loadGame', true);
+      this.closeDialog();
     },
     gameSelected(index, board) {
       this.set('selectedIndex', index);
