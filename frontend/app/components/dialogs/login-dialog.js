@@ -5,6 +5,7 @@ export default Ember.Component.extend(Dialog, {
   store: Ember.inject.service(),
   currentUser: Ember.inject.service(),
   session: Ember.inject.service(),
+  appState: Ember.inject.service(),
   registering: false,
   user: null,
 
