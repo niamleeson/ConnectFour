@@ -22,32 +22,6 @@ export default Ember.Component.extend(Dialog, {
       this.get('session').authenticate(authenticator, credentials)
         .then(() => {
           this.get('currentUser').load();
-      //     this.get('session').authorize('authorizer:custom', (headerName, headerValue) => {
-      //     const headers = {};
-      //     headers[headerName] = headerValue;
-      //     let data = {
-            
-      //     };
-
-      //     this.get('ajax').request('/users', {
-      //       headers,
-      //       method: 'GET',
-      //       data: data
-      //     })
-      //       .then((data) => {
-      //         this.closeDialog(data);
-      //         this.set('appState.flashMessage', 'Game Saved');
-      //         this.set('appState.flashMessageType', 'success');
-      //         this.set('appState.flashMessageShown', true);
-      //       })
-      //       .catch(() => {
-      //         this.closeDialogAndReject();
-      //         this.set('appState.flashMessage', 'Something went wrong :(');
-      //         this.set('appState.flashMessageType', 'error');
-      //         this.set('appState.flashMessageShown', true);
-      //       });
-      //   });
-
           this.closeDialog();
         })
         .catch((reason) => {

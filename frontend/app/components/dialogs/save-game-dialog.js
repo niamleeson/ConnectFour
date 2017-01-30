@@ -6,6 +6,7 @@ export default Ember.Component.extend(Dialog, {
   session: Ember.inject.service(),
   appState: Ember.inject.service(),
   gameState: Ember.inject.service(),
+  currentUser: Ember.inject.service(),
   ajax: Ember.inject.service(),
   saveObj: {},
   createTmpSaveObj: Ember.on('didReceiveAttrs', function () {
@@ -21,25 +22,19 @@ export default Ember.Component.extend(Dialog, {
     },
     saveGame() {
       if (this.get('session.isAuthenticated')) {
-        // let board = this.get('store').createRecord('board', {
-        //   boardState: this.get('board'),
-        //   openCols: this.get('openCols')
-        // });
+        let board = this.get('store').createRecord('board', {
+          name: this.get('saveObj.name'),
+          boardState: this.get('gameState.board'),
+          openCols: this.get('gameState.openCols'),
+          user: this.get('currentUser.user')
+        });
 
         this.get('session').authorize('authorizer:custom', (headerName, headerValue) => {
           const headers = {};
           headers[headerName] = headerValue;
-          let data = {
-            board_state: this.get('gameState.board'),
-            open_cols: this.get('gameState.openCols')
-          };
-
-          this.get('ajax').request('/save_game', {
-            headers,
-            method: 'POST',
-            data: data
-          })
+          board.save()
             .then((data) => {
+              console.log(data);
               this.closeDialog(data);
               this.set('appState.flashMessage', 'Game Saved');
               this.set('appState.flashMessageType', 'success');

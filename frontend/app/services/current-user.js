@@ -14,7 +14,7 @@ export default Ember.Service.extend({
     if (this.get('session.isAuthenticated')) {
       return this.get('store').findAll('user')      
       .then((user) => {
-        this.set('user', user);
+        this.set('user', user.objectAt(0));
       });
     }
   }

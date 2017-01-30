@@ -1,4 +1,17 @@
 class BoardsController < ApplicationController
+  def index
+    
+  end
+
+  def create
+    user = User.find(params["data"]["relationships"]["user"]["data"]["id"].to_i)
+    board = Board.new(board_params)
+    board.user = user
+    board.save!
+    options = {}
+    render json: ActiveModelSerializers::SerializableResource.new(board, options).as_json
+  end
+
   def save_game
     if params[:name].present?
       @name = params[:name]
@@ -52,6 +65,15 @@ class BoardsController < ApplicationController
   end
 
   private
+
+  def board_params
+    data = {}
+    data[:name] = params["data"]["attributes"]["name"]
+    data[:board_state] = params["data"]["attributes"]["board-state"]
+    data[:open_cols] = params["data"]["attributes"]["open-cols"]
+
+    return data
+  end
 
   def solve_best_move(board, open_cols, column, difficulty)
     @best_move = 0
