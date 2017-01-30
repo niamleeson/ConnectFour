@@ -52,11 +52,11 @@ export default Ember.Component.extend(Dialog, {
               this.closeDialog();
             })
             .catch((reason) => {
-              this.set('errorMessage', reason.error || reason);
+              this.set('errorMessage', reason.error);
             });
         })
         .catch((error) => {
-          this.set('errorMessage', error);
+          this.set('errorMessage', 'User Already Exists');
         });
     }
   }

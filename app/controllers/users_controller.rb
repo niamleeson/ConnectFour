@@ -8,9 +8,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    options = {}
-    render json: ActiveModelSerializers::SerializableResource.new(user, options).as_json
+    existing_user = User.where(email: params["data"]["attributes"]["email"]).first
+
+    if existing_user.present?
+      render json: { error: "User already exists" }, status: 422
+    else
+      user = User.create(user_params)
+      options = {}
+      render json: ActiveModelSerializers::SerializableResource.new(user, options).as_json
+    end
+  end
+
+  def update
+    render status: 422
   end
 
   private
