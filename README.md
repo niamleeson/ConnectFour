@@ -16,8 +16,10 @@ Features to be included in the future:
 
 * Ability to let the connect four bot to start first.
 
-* Ability to select different colors.
+* Replay functionality to watch any past games.
 
 * A form to update a user's info.
 
-* Replay functionality to watch any past games.
+* Extensive user sign up form validations.
+
+* Ability to select different colors.
