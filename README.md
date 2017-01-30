@@ -24,4 +24,4 @@ Features to be included in the future:
 
 * Ability to select different colors.
 
-Demo: powerful-island-92981.herokuapp.com
+Demo: http://powerful-island-92981.herokuapp.com/
