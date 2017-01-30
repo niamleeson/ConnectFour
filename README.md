@@ -14,7 +14,7 @@ A saved game is also able to be deleted.
 
 Features to be included in the future:
 
-* Ability to let the connect four bot to start first.
+* Ability to let the computer start first.
 
 * Replay functionality to watch any past games.
 
