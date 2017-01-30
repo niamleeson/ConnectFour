@@ -1,24 +1,23 @@
-# README
+# Jay's Connect Four Game
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The application is built with Ruby on Rails framework and Ember JavaScript framework.
 
-Things you may want to cover:
+A player is able to select a difficulty for the connect four bot.
+Higher difficulty will lead to slower bot response time due to the depth of trees it needs to go through.
 
-* Ruby version
+Currently, the player's color is red and the computer's color is yellow,
+but the functionality to change this will be added in the future.
 
-* System dependencies
+A player is able to save the current game or load up a past saved game,
+but to enable this functionality, the player must sign in or sign up initially.
+A saved game is also able to be deleted.
 
-* Configuration
+Features to be included in the future:
 
-* Database creation
+* Ability to let the connect four bot to start first.
 
-* Database initialization
+* Ability to select different colors.
 
-* How to run the test suite
+* A form to update a user's info.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Replay functionality to watch any past games.

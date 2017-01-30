@@ -10,7 +10,7 @@ export default Ember.Component.extend(Dialog, {
   ajax: Ember.inject.service(),
   saveObj: {},
   createTmpSaveObj: Ember.on('didReceiveAttrs', function () {
-    this.set('saveObj', { name: null });
+    this.set('saveObj', { name: `game-${new Date().toJSON().substr(0, 19)}` });
   }),
 
   actions: {

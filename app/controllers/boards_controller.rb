@@ -15,26 +15,6 @@ class BoardsController < ApplicationController
     render status: 204
   end
 
-  def save_game
-    if params[:name].blank?
-      @name = "game-#{Time.now.to_i}"
-    else
-      @name = params[:name]
-    end
-
-    @board_state = Array.new(6) 
-    @board_state[0] = params[:board_state]["0"].map{|i| i.to_i}
-    @board_state[1] = params[:board_state]["1"].map{|i| i.to_i}
-    @board_state[2] = params[:board_state]["2"].map{|i| i.to_i}
-    @board_state[3] = params[:board_state]["3"].map{|i| i.to_i}
-    @board_state[4] = params[:board_state]["4"].map{|i| i.to_i}
-    @board_state[5] = params[:board_state]["5"].map{|i| i.to_i}
-    
-    @open_cols = params[:open_cols].map{|i| i.to_i}
-
-    @board_model = Board.create!(name: @name, board_state: @board_state, open_cols: @open_cols)
-  end
-
   def load_games
     user = User.find(params["user_id"].to_i)
     boards = Board.where(user: user).all
