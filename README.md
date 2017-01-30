@@ -24,4 +24,6 @@ Features to be included in the future:
 
 * Ability to select different colors.
 
+* And definitely more comments in the code are needed.
+
 Demo: http://powerful-island-92981.herokuapp.com/
