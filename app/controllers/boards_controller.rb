@@ -217,7 +217,7 @@ class BoardsController < ApplicationController
     loc = []
     r = row
     c = last_move
-    while r >= 0 && c < width
+    while r > 0 && c < width
       r -= 1
       c += 1
     end
