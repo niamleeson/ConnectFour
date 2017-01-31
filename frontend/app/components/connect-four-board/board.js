@@ -68,14 +68,17 @@ export default Ember.Component.extend({
 
             this.get('gameState').sendGameState(col)
               .then((data) => {
-                if (data.win_status === 1) {
+                if (data.win_status === 'human') {
                   this.set('gameState.humanWins', true);
                   this.set('gameState.playerInputDisabled', true);
                   this.highlightDiscs(data.winning_combo, 'player');
-                } else if (data.win_status === 2) {
+                } else if (data.win_status === 'computer') {
                   this.set('gameState.compWins', true);
                   this.set('gameState.playerInputDisabled', true);
                   this.highlightDiscs(data.winning_combo, 'comp');
+                } else if (data.win_status === 'tie') {
+                  this.set('gameState.tie', true);
+                  this.set('gameState.playerInputDisabled', true);
                 }
                 this.insertDisc(data.best_move);
                 this.set('gameState.disabled', false);
@@ -88,14 +91,17 @@ export default Ember.Component.extend({
             this.get('gameState').setGameStatusToHumanPlaying();
             this.get('gameState').sendGameState(col)
               .then((data) => {
-                if (data.win_status === 1) {
+                if (data.win_status === 'human') {
                   this.set('gameState.humanWins', true);
                   this.set('gameState.playerInputDisabled', true);
                   this.highlightDiscs(data.winning_combo, 'player');
-                } else if (data.win_status === 2) {
+                } else if (data.win_status === 'computer') {
                   this.set('gameState.compWins', true);
                   this.set('gameState.playerInputDisabled', true);
                   this.highlightDiscs(data.winning_combo, 'comp');
+                } else if (data.win_status === 'tie') {
+                  this.set('gameState.tie', true);
+                  this.set('gameState.playerInputDisabled', true);
                 }
                 this.set('gameState.disabled', false);
               })

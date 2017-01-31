@@ -10,6 +10,7 @@ export default Ember.Service.extend({
   playerInputDisabled: false,
   compWins: false,
   humanWins: false,
+  tie: false,
   player: 1,
   computer: 2,
 
@@ -46,6 +47,7 @@ export default Ember.Service.extend({
     this.set('disabled', false);
     this.set('compWins', false);
     this.set('humanWins', false);
+    this.set('tie', false);
     this.set('playerInputDisabled', false);
   },
 
@@ -67,11 +69,13 @@ export default Ember.Service.extend({
     this.set('playerInputDisabled', false);
   },
 
-  gameStateText: Ember.computed('disabled', 'compWins', 'humanWins', function () {
+  gameStateText: Ember.computed('disabled', 'compWins', 'humanWins', 'tie', function () {
     if (this.get('compWins')) {
       return 'Computer wins';
     } else if (this.get('humanWins')) {
       return 'Player wins';
+    } else if (this.get('tie')) {
+      return 'Game is tied';
     } else {
       if (this.get('disabled')) {
         return 'Computer is thinking';

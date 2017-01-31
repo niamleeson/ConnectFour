@@ -23,7 +23,7 @@ class BoardsController < ApplicationController
   end
 
   def solve
-    # need a better way to get a multidimensional array from ruby strong parameter
+    # for some reason ember is serializing an array weirdly
     @board = Array.new(6) 
     @board[0] = params[:board]["0"].map{|i| i.to_i}
     @board[1] = params[:board]["1"].map{|i| i.to_i}
@@ -37,20 +37,26 @@ class BoardsController < ApplicationController
     @column = params[:column].to_i
     @difficulty = params[:difficulty].to_i
 
-    #first check if someone already won
-    #if so, render json with win status and winning combo
-    #if not, solve for best move
-    if rate_board(false) == Float::INFINITY
-      winning_combo = find_winning_combo(@last_move, 2)
-      win_status = 2
-      render json: {best_move: nil, win_status: win_status, winning_combo: winning_combo}
-    elsif rate_board(false) == -Float::INFINITY
-      winning_combo = find_winning_combo(@last_move, 1)
-      win_status = 1
-      render json: {best_move: nil, win_status: win_status, winning_combo: winning_combo}      
+    comp_board_score = rate_board(false)
+    human_board_score = rate_board(false)
+
+    # if game is over and no one won the game, return tie
+    if @open_cols == [-1,-1,-1,-1,-1,-1,-1] && comp_board_score != Float::INFINITY && human_board_score != -Float::INFINITY
+      render json: {best_move: nil, win_status: 'tie', winning_combo: nil}
     else
-      data = solve_best_move(@board, @open_cols, @column, @difficulty)
-      render json: data      
+      # if comp won
+      if comp_board_score == Float::INFINITY
+        winning_combo = find_winning_combo(@last_move, 2)
+        render json: {best_move: nil, win_status: 'computer', winning_combo: winning_combo}
+      # if human won  
+      elsif human_board_score == -Float::INFINITY
+        winning_combo = find_winning_combo(@last_move, 1)
+        render json: {best_move: nil, win_status: 'human', winning_combo: winning_combo}
+      # otherwise keep playing the game   
+      else
+        data = solve_best_move(@board, @open_cols, @column, @difficulty)
+        render json: data      
+      end
     end
   end
 
@@ -66,6 +72,7 @@ class BoardsController < ApplicationController
   end
 
   def solve_best_move(board, open_cols, column, difficulty)
+    # sets up some shared instance variable that can be modified during recursion    
     @best_move = 0
     @alpha = -Float::INFINITY
     @beta = Float::INFINITY
@@ -79,7 +86,7 @@ class BoardsController < ApplicationController
     score = rate_board(is_comp)
 
     if depth == 0 || score == Float::INFINITY || score === -Float::INFINITY
-      return score  
+      return score
     end
 
     if is_comp
