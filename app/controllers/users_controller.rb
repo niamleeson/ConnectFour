@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     if current_user
       render json: ActiveModelSerializers::SerializableResource.new(current_user, {}).as_json
     else
-      render json: { error: 'user not found' }
+      render json: { errors: 'user not found' }
     end
   end
 

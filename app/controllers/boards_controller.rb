@@ -217,12 +217,12 @@ class BoardsController < ApplicationController
     loc = []
     r = row
     c = last_move
-    while r > 0 && c < width
+    while r > 0 && c < width - 1
       r -= 1
       c += 1
     end
-    
-    while r < height && c >= 0
+
+    while r < height && c > 0
       tr_str += @board[r][c].to_s
       loc.push([r,c])
       r += 1
