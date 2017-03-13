@@ -26,5 +26,4 @@ Features to be included in the future:
 
 * And definitely more comments in the code are needed.
 
-Please wait a little for Heroku to start
-Demo: http://powerful-island-92981.herokuapp.com/
+Demo: (Please wait a little for Heroku to start) http://powerful-island-92981.herokuapp.com/
